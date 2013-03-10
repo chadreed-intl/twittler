@@ -1,3 +1,77 @@
 body {
-  margin: 0px;
+  margin: 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+}
+
+button {
+	height: 50px;
+	width: 100px;
+	border-radius: 8px;
+	border-color: black;
+	box-shadow: 2px 2px 2px;
+	font-size: 15px;
+	background-color: #d8ac02;
+	margin-right: 5px;
+}
+
+.button {
+	padding-left: 13px;
+}
+
+.tweets {
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 48%;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-right: 20px;
+}
+
+.user-sidebar {
+	position: absolute;
+	top: 30px;
+	right: 0;
+	width: 48%;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.userclick {
+	color: black;
+	text-decoration: underline;
+	font-size: 18px;
+}
+
+.userclick:hover {
+	cursor:pointer;
+}
+
+.tweetBox {
+	background-color: #bbd8e9;
+	margin: 10px;
+	border-radius: 8px;
+	height: 50px;
+	padding: 9px;
+	border: 2px solid;
+}
+
+li {
+	list-style-type: none;
+ }
+
+.time {
+	position: relative;
+	float: right;
+	top: 70%;
+} 
+
+.userBox {
+	background-color: rgb(220, 234, 244);
+}
+
+.userText {
+	text-align: center;
+	font-size: 15px;
 }
