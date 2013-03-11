@@ -56,7 +56,11 @@
       $('body').on('click', '.addButton', function(event){
         event.preventDefault();
         var $inTweet = $('.inputTweet').val();
-        var $inName = $('.inputName').val();
+        visitor = $('.inputName').val();
+        if (!streams['users'][visitor]){ 
+         streams['users'][visitor] = [];
+       };
+        writeTweet($inTweet);
       });  
     </script>
   </body>
