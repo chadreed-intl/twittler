@@ -4,26 +4,74 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="twitter_data.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <title>Twittler</title>
   </head>
   <body>
+
+    <!-- Mostly empty HTML elements to fill with the script functions below -->
+    <div class='button'>
+      <button class='refresh'>Get Tweets</button>
+      <label></label>
+      <form class='addTweetform'>
+        <br><input type="text" class='inputName' value="Your Name" />
+        <input type="text" class='inputTweet' value="Your Tweet" />
+        <input class='addButton' type="submit" value='Tweet!' />
+      </form>
+    </div>
+    <div class='tweets'>
+      <ul></ul>
+    </div>
+    <div class="user-sidebar">
+      <ol></ol>
+    </div>
     <script>
 
-      $(document)['ready'](function(){
-
-        var $body = $('body');
-        $body['html']('');
+      //Button and logic to show all tweets
+      $('button').click(function(){
+        $('label').html(' ');
+        $('label').append('// All tweets since: ' + moment().format('h:mm:ss a'));
+        var $div = $('div.tweets');
+        $div.html('');
         var allhtml = "";
 
-        var index = streams['home']['length'] - 1;
+        var index = streams.home.length - 1;
+
         while(index >= 0){
-          var tweet = streams['home'][index];
-          console['log']('rendering a tweet:', tweet);
-          var html = tweet['user'] + ': ' + tweet['message'] + '<br/>';
+          var tweet = streams.home[index];
+          console.log('rendering a tweet:', tweet);
+          var html = '<li><div class="tweetBox clickBox"><span class="userclick">' + tweet.user + '</span>' + ' : ' + ' <div class="time">[' + moment().format('h:mm:ss a') + ']</div>  ' + tweet.message + '</div></li>';
           allhtml += html;
           index = index - 1;
         }
-        $body['html'](allhtml);
 
+        $div.html(allhtml);
+      });
+
+      //Logic to display specific user tweets on click
+      $('body').on('click', '.userclick', function(){
+        $('.user-sidebar > li, h4').remove();
+        var username = $(this)['text']()
+
+        $('.user-sidebar').append('<h4 class="userText">Tweets from ' + username  + ' since: ' + moment().format('h:mm:ss a') + '</h4>');
+        tweetindex = streams.users[username].length - 1
+
+        for (i = tweetindex; i >= 0; i--){
+          $('.user-sidebar').append('<li class="tweetBox userBox">' + streams.users[username][i].message + '</li>')
+        }
+      });
+
+      //Logic and click handler to create a tweet and new user (if necessary)
+      $('body').on('click', '.addButton', function(event){
+        event.preventDefault();
+        var $inTweet = $('.inputTweet').val();
+        visitor = $('.inputName').val();
+        if (!streams.users[visitor]){
+         streams.users[visitor] = [];
+       };
+        writeTweet($inTweet);
+        $('.inputTweet').val('')
+        $('.inputName').val('')
       });
 
     </script>
