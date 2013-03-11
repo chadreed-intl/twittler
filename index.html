@@ -14,7 +14,7 @@
       <form class='addTweetform'>
         <br><input type="text" class='inputName' value="Your Name" />
         <input type="text" class='inputTweet' value="Your Tweet" />
-        <input class='addButton' type="submit" />
+        <input class='addButton' type="submit" value='Tweet!' />
       </form>
     </div>
     <div class='tweets'>
@@ -61,6 +61,8 @@
          streams['users'][visitor] = [];
        };
         writeTweet($inTweet);
+        $('.inputTweet').val('')
+        $('.inputName').val('')
       });  
     </script>
   </body>
