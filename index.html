@@ -5,11 +5,17 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="twitter_data.js"></script>
     <script type="text/javascript" src="moment.min.js"></script>
+    <title>Twittler</title>
   </head>
   <body>
     <div class='button'>
       <button class='refresh'>Get Tweets</button>
       <label></label>
+      <form class='addTweetform'>
+        <br><input type="text" class='inputName' value="Your Name" />
+        <input type="text" class='inputTweet' value="Your Tweet" />
+        <input class='addButton' type="submit" />
+      </form>
     </div>
     <div class='tweets'>
       <ul></ul>
@@ -35,20 +41,10 @@
           allhtml += html;
           index = index - 1;
         }
-
-        $div['html'](allhtml);
+      $div['html'](allhtml);
       });
-
-
-
       $('body').on('click', '.userclick', function(){
-        /*
-        var $div2 = $('div.user-sidebar');
-        $div2['html']('');
-        var sidehtml = "";
-        */
         $('.user-sidebar > li, h4').remove();
-        
         var username = $(this)['text']()
         var date = new Date();
         $('.user-sidebar').append('<h4 class="userText">Tweets from ' + username  + ' since: ' + moment().format('h:mm:ss a') + '</h4>');
@@ -56,9 +52,12 @@
         for (i = tweetindex; i >= 0; i--){
           $('.user-sidebar')['append']('<li class="tweetBox userBox">' + streams['users'][username][i]['message'] + '</li>')
         }
-          
       });
-
+      $('body').on('click', '.addButton', function(event){
+        event.preventDefault();
+        var $inTweet = $('.inputTweet').val();
+        var $inName = $('.inputName').val();
+      });  
     </script>
   </body>
 </html>
