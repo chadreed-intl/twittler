@@ -8,8 +8,11 @@
     <title>Twittler</title>
   </head>
   <body>
+  
+    <!-- Mostly empty HTML elements to fill with the script functions below --> 
     <div class='button'>
       <button class='refresh'>Get Tweets</button>
+      //
       <label></label>
       <form class='addTweetform'>
         <br><input type="text" class='inputName' value="Your Name" />
@@ -24,6 +27,8 @@
       <ol></ol>
     </div>
     <script>
+  
+      //Button and logic to show all tweets
       $('button').click(function(){
         $('label')['html'](' ');
         $('label')['append']('All tweets since: ' + moment().format('h:mm:ss a'));
@@ -43,16 +48,19 @@
         }
       $div['html'](allhtml);
       });
+
+      //Logic to display specific user tweets on click
       $('body').on('click', '.userclick', function(){
         $('.user-sidebar > li, h4').remove();
         var username = $(this)['text']()
-        var date = new Date();
         $('.user-sidebar').append('<h4 class="userText">Tweets from ' + username  + ' since: ' + moment().format('h:mm:ss a') + '</h4>');
         tweetindex = streams['users'][username]['length'] - 1
         for (i = tweetindex; i >= 0; i--){
           $('.user-sidebar')['append']('<li class="tweetBox userBox">' + streams['users'][username][i]['message'] + '</li>')
         }
       });
+
+      //Logic and click handler to create a new user (if necessary) and new tweet
       $('body').on('click', '.addButton', function(event){
         event.preventDefault();
         var $inTweet = $('.inputTweet').val();
@@ -63,7 +71,7 @@
         writeTweet($inTweet);
         $('.inputTweet').val('')
         $('.inputName').val('')
-      });  
+      });
     </script>
   </body>
 </html>
